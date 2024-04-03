@@ -1,0 +1,32 @@
+idzio_lib = static_library(
+    'idzio',
+    name_prefix : '',
+    include_directories : inc,
+    implicit_include_directories : false,
+    c_pch : '../precompiled.h',
+    dependencies : [
+        dinput8_lib,
+        dxguid_lib,
+        xinput_lib,
+    ],
+    link_with : [
+        util_lib,
+    ],
+    sources : [
+        'backend.h',
+        'config.c',
+        'config.h',
+        'di.c',
+        'di.h',
+        'di-dev.c',
+        'di-dev.h',
+        'dllmain.c',
+        'idzio.h',
+        'shifter.c',
+        'shifter.h',
+        'wnd.c',
+        'wnd.h',
+        'xi.c',
+        'xi.h',
+    ],
+)

@@ -1,0 +1,186 @@
+#include <windows.h>
+
+#include <assert.h>
+
+#include "board/sg-cmd.h"
+#include "board/sg-led.h"
+#include "board/sg-led-cmd.h"
+
+#include "util/dprintf.h"
+
+static HRESULT sg_led_dispatch(
+        void *ctx,
+        const void *v_req,
+        void *v_res);
+
+static HRESULT sg_led_cmd_reset(
+        const struct sg_led *led,
+        const struct sg_req_header *req,
+        struct sg_led_res_reset *res);
+
+static HRESULT sg_led_cmd_get_info(
+        const struct sg_led *led,
+        const struct sg_req_header *req,
+        struct sg_led_res_get_info *res);
+
+static HRESULT sg_led_cmd_set_color(
+        const struct sg_led *led,
+        const struct sg_led_req_set_color *req);
+
+static const struct version_info led_version[] = {
+    {"15084\xFF\x10\x00\x12", 9},
+    {"000-00000\xFF\x11\x40", 12},
+    // maybe the same?
+    {"000-00000\xFF\x11\x40", 12}
+};
+
+void sg_led_init(
+        struct sg_led *led,
+        uint8_t addr,
+        const struct sg_led_ops *ops,
+        unsigned int gen,
+        void *ctx)
+{
+    assert(led != NULL);
+    assert(ops != NULL);
+
+    led->ops = ops;
+    led->ops_ctx = ctx;
+    led->addr = addr;
+    led->gen = gen;
+}
+
+void sg_led_transact(
+        struct sg_led *led,
+        struct iobuf *res_frame,
+        const void *req_bytes,
+        size_t req_nbytes)
+{
+    assert(led != NULL);
+    assert(res_frame != NULL);
+    assert(req_bytes != NULL);
+
+    sg_req_transact(res_frame, req_bytes, req_nbytes, sg_led_dispatch, led);
+}
+
+#ifdef NDEBUG
+#define sg_led_dprintfv(led, fmt, ap)
+#define sg_led_dprintf(led, fmt, ...)
+#else
+static void sg_led_dprintfv(
+        const struct sg_led *led,
+        const char *fmt,
+        va_list ap)
+{
+    dprintf("RGB LED %02x: ", led->addr);
+    dprintfv(fmt, ap);
+}
+
+static void sg_led_dprintf(
+        const struct sg_led *led,
+        const char *fmt,
+        ...)
+{
+    va_list ap;
+
+    va_start(ap, fmt);
+    sg_led_dprintfv(led, fmt, ap);
+    va_end(ap);
+}
+#endif
+
+static HRESULT sg_led_dispatch(
+        void *ctx,
+        const void *v_req,
+        void *v_res)
+{
+    const struct sg_led *led;
+    const union sg_led_req_any *req;
+    union sg_led_res_any *res;
+
+    led = ctx;
+    req = v_req;
+    res = v_res;
+
+    if (req->simple.hdr.addr != led->addr) {
+        /* Not addressed to us, don't send a response */
+        return S_FALSE;
+    }
+
+    switch (req->simple.hdr.cmd) {
+    case SG_RGB_CMD_RESET:
+        return sg_led_cmd_reset(led, &req->simple, &res->reset);
+
+    case SG_RGB_CMD_GET_INFO:
+        return sg_led_cmd_get_info(led, &req->simple, &res->get_info);
+
+    case SG_RGB_CMD_SET_COLOR:
+        return sg_led_cmd_set_color(led, &req->set_color);
+
+    default:
+        sg_led_dprintf(led, "Unimpl command %02x\n", req->simple.hdr.cmd);
+
+        return E_NOTIMPL;
+    }
+}
+
+static HRESULT sg_led_cmd_reset(
+        const struct sg_led *led,
+        const struct sg_req_header *req,
+        struct sg_led_res_reset *res)
+{
+    HRESULT hr;
+
+    sg_led_dprintf(led, "Reset\n");
+    sg_res_init(&res->res, req, sizeof(res->payload));
+    res->payload = 0;
+
+    if (led->ops->reset != NULL) {
+        hr = led->ops->reset(led->ops_ctx);
+    } else {
+        hr = S_OK;
+    }
+
+    if (FAILED(hr)) {
+        sg_led_dprintf(led, "led->ops->reset: Error %x\n", hr);
+        return hr;
+    }
+
+    return S_OK;
+}
+
+static HRESULT sg_led_cmd_get_info(
+        const struct sg_led *led,
+        const struct sg_req_header *req,
+        struct sg_led_res_get_info *res)
+{
+    sg_led_dprintf(led, "Get info\n");
+
+    const struct version_info *fw = &led_version[led->gen - 1];
+
+    sg_res_init(&res->res, req, fw->length);
+    memcpy(res->payload, fw->version, fw->length);
+
+    return S_OK;
+}
+
+static HRESULT sg_led_cmd_set_color(
+        const struct sg_led *led,
+        const struct sg_led_req_set_color *req)
+{
+    if (req->req.payload_len != sizeof(req->payload)) {
+        sg_led_dprintf(led, "%s: Payload size is incorrect\n", __func__);
+
+        goto fail;
+    }
+
+    led->ops->set_color(
+            led->ops_ctx,
+            req->payload[0],
+            req->payload[1],
+            req->payload[2]);
+
+fail:
+    /* No response */
+    return S_FALSE;
+}

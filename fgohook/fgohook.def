@@ -1,0 +1,84 @@
+LIBRARY fgohook
+
+EXPORTS
+    aime_io_get_api_version
+    aime_io_init
+    aime_io_led_set_color
+    aime_io_nfc_get_aime_id
+    aime_io_nfc_get_felica_id
+    aime_io_nfc_poll
+    amDllVideoClose @2
+    amDllVideoGetVBiosVersion @4
+    amDllVideoOpen @1
+    amDllVideoSetResolution @3
+    fgo_io_get_api_version
+    fgo_io_get_gamebtns
+    fgo_io_get_stick
+    fgo_io_get_coin
+    fgo_io_get_opbtns
+    fgo_io_init
+    fgo_io_poll
+    fwdlusb_open
+    fwdlusb_close
+    fwdlusb_listupPrinter
+    fwdlusb_listupPrinterSN
+    fwdlusb_selectPrinter
+    fwdlusb_selectPrinterSN
+    fwdlusb_getPrinterInfo
+    fwdlusb_status
+    fwdlusb_statusAll
+    fwdlusb_resetPrinter
+    fwdlusb_updateFirmware
+    fwdlusb_getFirmwareInfo
+    fwdlusb_MakeThread
+    fwdlusb_ReleaseThread
+    fwdlusb_AttachThreadCount
+    fwdlusb_getErrorLog
+    chcusb_MakeThread
+    chcusb_open
+    chcusb_close
+    chcusb_ReleaseThread
+    chcusb_listupPrinter
+    chcusb_listupPrinterSN
+    chcusb_selectPrinter
+    chcusb_selectPrinterSN
+    chcusb_getPrinterInfo
+    chcusb_imageformat=chcusb_imageformat_330
+    chcusb_setmtf
+    chcusb_makeGamma
+    chcusb_setIcctable
+    chcusb_copies
+    chcusb_status
+    chcusb_statusAll
+    chcusb_startpage
+    chcusb_endpage
+    chcusb_write
+    chcusb_writeLaminate
+    chcusb_writeHolo
+    chcusb_setPrinterInfo
+    chcusb_getGamma
+    chcusb_getMtf
+    chcusb_cancelCopies
+    chcusb_setPrinterToneCurve
+    chcusb_getPrinterToneCurve
+    chcusb_blinkLED
+    chcusb_resetPrinter
+    chcusb_AttachThreadCount
+    chcusb_getPrintIDStatus
+    chcusb_setPrintStandby
+    chcusb_testCardFeed
+    chcusb_exitCard
+    chcusb_getCardRfidTID
+    chcusb_commCardRfidReader
+    chcusb_updateCardRfidReader
+    chcusb_getErrorLog
+    chcusb_getErrorStatus
+    chcusb_setCutList
+    chcusb_setLaminatePattern
+    chcusb_color_adjustment
+    chcusb_color_adjustmentEx
+    chcusb_getEEPROM
+    chcusb_setParameter
+    chcusb_getParameter
+    chcusb_universal_command
+

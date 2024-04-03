@@ -1,0 +1,44 @@
+LIBRARY kemonohook
+
+EXPORTS
+    chcusb_MakeThread=chcusb_std_MakeThread @1
+    chcusb_open=chcusb_std_open @2
+    chcusb_close=chcusb_std_close @3
+    chcusb_ReleaseThread=chcusb_std_ReleaseThread @4
+    chcusb_listupPrinter=chcusb_std_listupPrinter @5
+    chcusb_listupPrinterSN=chcusb_std_listupPrinterSN @6
+    chcusb_selectPrinter=chcusb_std_selectPrinter @7
+    chcusb_selectPrinterSN=chcusb_std_selectPrinterSN @8
+    chcusb_getPrinterInfo=chcusb_std_getPrinterInfo @9
+    chcusb_imageformat=chcusb_std_imageformat @10
+    chcusb_setmtf=chcusb_std_setmtf @11
+    chcusb_makeGamma=chcusb_std_makeGamma @12
+    chcusb_setIcctable=chcusb_std_setIcctable @13
+    chcusb_copies=chcusb_std_copies @14
+    chcusb_status=chcusb_std_status @15
+    chcusb_statusAll=chcusb_std_statusAll @16
+    chcusb_startpage=chcusb_std_startpage @17
+    chcusb_endpage=chcusb_std_endpage @18
+    chcusb_write=chcusb_std_write @19
+    chcusb_writeLaminate=chcusb_std_writeLaminate @20
+    chcusb_setPrinterInfo=chcusb_std_setPrinterInfo @21
+    chcusb_getGamma=chcusb_std_getGamma @22
+    chcusb_getMtf=chcusb_std_getMtf @23
+    chcusb_cancelCopies=chcusb_std_cancelCopies @24
+    chcusb_setPrinterToneCurve=chcusb_std_setPrinterToneCurve @25
+    chcusb_getPrinterToneCurve=chcusb_std_getPrinterToneCurve @26
+    chcusb_blinkLED=chcusb_std_blinkLED @27
+    chcusb_resetPrinter=chcusb_std_resetPrinter @28
+    chcusb_AttachThreadCount=chcusb_std_AttachThreadCount @29
+    chcusb_getPrintIDStatus=chcusb_std_getPrintIDStatus @30
+    chcusb_setPrintStandby=chcusb_std_setPrintStandby @31
+    chcusb_testCardFeed=chcusb_std_testCardFeed @32
+    chcusb_setParameter=chcusb_std_setParameter @33
+    chcusb_getParameter=chcusb_std_getParameter @34
+    chcusb_getErrorStatus=chcusb_std_getErrorStatus @35
+    chcusb_setCutList=chcusb_std_setCutList @40
+    chcusb_setLaminatePattern=chcusb_std_setLaminatePattern @41
+    chcusb_color_adjustment=chcusb_std_color_adjustment @42
+    chcusb_color_adjustmentEx=chcusb_std_color_adjustmentEx @43
+    chcusb_getEEPROM=chcusb_std_getEEPROM @58
+    chcusb_universal_command=chcusb_std_universal_command @73

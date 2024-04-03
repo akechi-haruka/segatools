@@ -1,0 +1,19 @@
+LIBRARY printerhook
+
+EXPORTS
+    fwdlusb_open=fwdlusb_std_open @1
+    __imp_fwdlusb_close=fwdlusb_std_close @2
+    fwdlusb_listupPrinter=fwdlusb_std_listupPrinter @3
+    fwdlusb_listupPrinterSN=fwdlusb_std_listupPrinterSN @4
+    fwdlusb_selectPrinter=fwdlusb_std_selectPrinter @5
+    fwdlusb_selectPrinterSN=fwdlusb_std_selectPrinterSN @6
+    fwdlusb_getPrinterInfo=fwdlusb_std_getPrinterInfo @7
+    fwdlusb_status=fwdlusb_std_status @8
+    fwdlusb_statusAll=fwdlusb_std_statusAll @9
+    fwdlusb_resetPrinter=fwdlusb_std_resetPrinter @10
+    fwdlusb_updateFirmware=fwdlusb_std_updateFirmware @11
+    fwdlusb_getFirmwareInfo=fwdlusb_std_getFirmwareInfo @12
+    fwdlusb_MakeThread=fwdlusb_std_MakeThread @13
+    fwdlusb_ReleaseThread=fwdlusb_std_ReleaseThread @14
+    fwdlusb_AttachThreadCount=fwdlusb_std_AttachThreadCount @15
+    fwdlusb_getErrorLog=fwdlusb_std_getErrorLog @16

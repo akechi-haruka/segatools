@@ -1,0 +1,4 @@
+LIBRARY syncio
+
+EXPORTS
+    sync_io_init

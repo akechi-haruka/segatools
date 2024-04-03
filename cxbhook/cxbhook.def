@@ -1,0 +1,31 @@
+LIBRARY cxbhook
+
+EXPORTS
+    Direct3DCreate9=hook_Direct3DCreate9
+    aime_io_get_api_version
+    aime_io_init
+    aime_io_led_set_color
+    aime_io_nfc_get_aime_id
+    aime_io_nfc_get_felica_id
+    aime_io_nfc_poll
+    amDllVideoClose @2
+    amDllVideoGetVBiosVersion @4
+    amDllVideoOpen @1
+    amDllVideoSetResolution @3
+    cCommIo_Close @15
+    cCommIo_GetAmpVolume @16
+    cCommIo_GetCoin @17
+    cCommIo_GetRelease @18
+    cCommIo_GetStatus @19
+    cCommIo_GetSwitch @20
+    cCommIo_GetTrigger @21
+    cCommIo_GetVolume @22
+    cCommIo_IsLoaded @23
+    cCommIo_Open @24
+    cCommIo_Recieve @25
+    cCommIo_SetAmpMute @26
+    cCommIo_SetAmpVolume @27
+    cCommIo_SetCoin @28
+    cCommIo_SetOutput @29
+    cCommIo_Update @30
+

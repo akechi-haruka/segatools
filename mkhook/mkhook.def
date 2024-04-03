@@ -1,0 +1,4 @@
+LIBRARY mkhook
+
+EXPORTS
+    Direct3DCreate9Ex=hook_Direct3DCreate9Ex
