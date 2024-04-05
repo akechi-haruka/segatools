@@ -383,21 +383,21 @@ static HRESULT sg_nfc_cmd_mifare_read_block(
         sg_res_init(&res->res, &req->req, sizeof(res->block));
 
         if (req->payload.block_no == 5){
-            // store card id
+            // ?
         } else if (req->payload.block_no == 6){
-            // merchant code
+            // ?
         } else if (req->payload.block_no == 8){
-            // store branch number
+            // ?
         } else if (req->payload.block_no == 9){
-            // passphrase
+            // ?
         } else if (req->payload.block_no == 10){
-            // passphrase
+            // ?
         } else if (req->payload.block_no == 12){
-            // passphrase
+            // ?
         } else if (req->payload.block_no == 13){
-            // passphrase
+            // ?
         } else if (req->payload.block_no == 14){
-            // passphrase
+            // ?
         }
 
         for (int i = 0; i < 16; i++){
